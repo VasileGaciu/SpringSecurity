@@ -9,13 +9,14 @@ import ro.fortech.security.service.AccountService;
 
 import static ro.fortech.security.util.Constants.ACCOUNT_DELETE_FAIL;
 
-@RestController("/")
+@RestController()
+@RequestMapping("/account")
 public class AccountController {
 
     @Autowired
     private AccountService accountService;
 
-    @GetMapping("/account/{accountId}")
+    @GetMapping("/{accountId}")
     public ResponseEntity<AccountModel> getCustomerAccount(@PathVariable("accountId") final Integer accountId){
         AccountModel account = accountService.getAccount(accountId);
         if(account == null){
@@ -24,7 +25,7 @@ public class AccountController {
         return ResponseEntity.ok(account);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/add")
     public ResponseEntity<Account> createAccount(@RequestBody Account account){
         Account savedAccount = accountService.createAccount(account);
         if(savedAccount == null){
@@ -33,7 +34,7 @@ public class AccountController {
         return ResponseEntity.ok().body(savedAccount);
     }
 
-    @PutMapping("/update/account")
+    @PutMapping("/update")
     public ResponseEntity<Account> updateAccount(@RequestBody final Account account){
         Account savedAccount = accountService.updateAccount(account);
         if(savedAccount == null){
@@ -42,7 +43,7 @@ public class AccountController {
         return ResponseEntity.ok().body(savedAccount);
     }
 
-    @DeleteMapping("/delete/account/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteAccount(@PathVariable("id") final Integer id){
        String response = accountService.deleteAccount(id);
        if(response == null){
