@@ -11,12 +11,12 @@ import java.util.List;
 import static ro.fortech.security.util.Constants.CUSTOMER_DELETE_FAIL;
 
 @RestController()
-@RequestMapping("/")
+@RequestMapping("/customer")
 public class CustomersController {
 
     @Autowired
     private CusotmesService cusotmesService;
-    @GetMapping("/customer/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") final Integer id){
         Customer customer = cusotmesService.getCustomerById(id);
         if(customer == null){
@@ -49,7 +49,7 @@ public class CustomersController {
         return ResponseEntity.ok(createdCustomer);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") final Integer id){
      String customerResponse = cusotmesService.deleteById(id);
      if(customerResponse == null){
