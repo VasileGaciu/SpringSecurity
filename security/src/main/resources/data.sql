@@ -20,3 +20,18 @@ INSERT INTO account (balance, customer_id) VALUES (3000.00, 4);
 
 -- Account for David Brown
 INSERT INTO account (balance, customer_id) VALUES (3500.00, 5);
+
+INSERT INTO role (role) VALUES ('user');
+INSERT INTO role (role) VALUES ('admin');
+
+-- Admin Users
+INSERT INTO users (username, password, role_id)
+VALUES ('John', '$2a$10$/wbAb7aOYpVetRBptgQDSO.VjT5dW4y58yek19VwxYW2uYhGAMEoq', 1);
+INSERT INTO users (username, password, role_id)
+VALUES ('Paul', '$2a$10$/wbAb7aOYpVetRBptgQDSO.VjT5dW4y58yek19VwxYW2uYhGAMEoq', 1);
+
+-- User Users
+INSERT INTO users (username, password, role_id)
+VALUES ('Edward', '$2a$10$/wbAb7aOYpVetRBptgQDSO.VjT5dW4y58yek19VwxYW2uYhGAMEoq', 2);
+INSERT INTO users (username, password, role_id)
+VALUES ('Jane', '$2a$10$/wbAb7aOYpVetRBptgQDSO.VjT5dW4y58yek19VwxYW2uYhGAMEoq', 2);

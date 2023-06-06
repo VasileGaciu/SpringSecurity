@@ -10,3 +10,16 @@ CREATE TABLE account (
     customer_id INT,
     FOREIGN KEY (customer_id) REFERENCES customer(id)
 );
+
+CREATE TABLE role (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  role VARCHAR(10)
+);
+
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(20),
+  password VARCHAR(100),
+  role_id INT,
+  FOREIGN KEY (role_id) REFERENCES role(id)
+);
