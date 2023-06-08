@@ -21,7 +21,7 @@ public class SecurityConfiguration{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/customer/**").permitAll()
-                .antMatchers("/account/**").authenticated()
+                .mvcMatchers("/account/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .and()

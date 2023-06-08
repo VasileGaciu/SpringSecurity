@@ -21,8 +21,8 @@ INSERT INTO account (balance, customer_id) VALUES (3000.00, 4);
 -- Account for David Brown
 INSERT INTO account (balance, customer_id) VALUES (3500.00, 5);
 
-INSERT INTO role (role) VALUES ('user');
-INSERT INTO role (role) VALUES ('admin');
+INSERT INTO role (role) VALUES ('ROLE_USER');
+INSERT INTO role (role) VALUES ('ROLE_ADMIN');
 
 -- Admin Users
 INSERT INTO users (username, password, role_id)
