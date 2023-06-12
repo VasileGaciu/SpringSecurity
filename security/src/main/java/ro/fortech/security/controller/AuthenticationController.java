@@ -23,6 +23,7 @@ public class AuthenticationController {
     private JwtService jwtService;
 
     @PostMapping("/token")
+    //@PreFilter("filterObject.username == 'Paul'")
     public ResponseEntity<TokenModel> getTokens(@RequestBody AuthenticationModel model){
       try {
           TokenModel tokenModel = jwtService.getTokens(model);

@@ -3,6 +3,7 @@ package ro.fortech.security.configuration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,6 +15,7 @@ import ro.fortech.security.configuration.securityfilters.AuthFilter;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class SecurityConfiguration{
 
     @Autowired
@@ -27,12 +29,6 @@ public class SecurityConfiguration{
                 .disable()
                 .headers().frameOptions()
                 .disable()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/customer/**").hasRole("USER")
-                .mvcMatchers("/auth/tokens").permitAll()
-                .mvcMatchers("/auth/refresh").authenticated()
-                .mvcMatchers("/account/**").hasRole("ADMIN")
                 .and()
                 .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
                 .formLogin()

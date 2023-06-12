@@ -42,7 +42,7 @@ public class JwtServiceImpl implements JwtService {
         }
         Map<String, Object> claims = new HashMap<>();
         TokenModel tokenModel = new TokenModel();
-        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 15);
+        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60);
         Date refreshTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60 * 3);
         String accessToken = generateToken(authenticationModel.getUsername(), claims, accessTokenExpiration);
         String refreshToken = generateToken(authenticationModel.getUsername(), claims, refreshTokenExpiration);
@@ -53,7 +53,10 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public TokenModel getAccessToken(String token) {
-        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 15);
+        if(!validateJwtToken(token)){
+           throw new BadCredentialsException("Token Invalid");
+        }
+        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60);
         Claims claims = Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(token).getBody();
         String accessToken = generateToken(claims.getSubject(), claims, accessTokenExpiration);
         return new TokenModel(accessToken, token);
