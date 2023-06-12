@@ -53,6 +53,9 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public TokenModel getAccessToken(String token) {
+        if(!validateJwtToken(token)){
+            throw new BadCredentialsException("Token Invalid");
+        }
         Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 15);
         Claims claims = Jwts.parserBuilder().setSigningKey(getKey()).build().parseClaimsJws(token).getBody();
         String accessToken = generateToken(claims.getSubject(), claims, accessTokenExpiration);
