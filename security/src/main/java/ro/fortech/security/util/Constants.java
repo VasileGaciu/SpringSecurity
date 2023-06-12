@@ -11,4 +11,8 @@ public class Constants {
             "Account can not be deleted because balance is greater than 0";
 
     public static final String ACCOUNT_DELETED = "Account deleted successfully";
+
+    public static final String JWT_TOKEN = "Authorization";
+
+    public static final String JWT_SECRET = "secretkladakdpasdkppsdjkfsjkdfjsodfosidfjsofiosdsecretkladakdpasdkppsdjkfsjkdfjsodfosidfjsofiosdsecretkladakdpasdkppsdjkfsjkdfjsodfosidfjsofiosdsecretkladakdpasdkppsdjkfsjkdfjsodfosidfjsofiosd";
 }
