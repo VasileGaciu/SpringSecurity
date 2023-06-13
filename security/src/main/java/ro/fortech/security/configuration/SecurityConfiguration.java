@@ -17,6 +17,7 @@ public class SecurityConfiguration{
                 .authorizeRequests()
                 .antMatchers("/customer/**").permitAll()
                 .antMatchers("/account/**").authenticated()
+                .antMatchers("/swagger-ui/**").authenticated()
                 .and()
                 .formLogin()
                 .and()
