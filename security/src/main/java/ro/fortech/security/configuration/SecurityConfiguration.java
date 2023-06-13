@@ -21,6 +21,7 @@ public class SecurityConfiguration{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/customer/**").permitAll()
+                .antMatchers("/swagger-ui/**").authenticated()
                 .mvcMatchers("/account/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
