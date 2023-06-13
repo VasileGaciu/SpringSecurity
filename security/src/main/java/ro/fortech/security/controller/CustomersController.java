@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ro.fortech.security.entity.Customer;
-import ro.fortech.security.service.CusotmesService;
+import ro.fortech.security.service.CustomerService;
 
 import java.util.List;
 
@@ -15,10 +15,10 @@ import static ro.fortech.security.util.Constants.CUSTOMER_DELETE_FAIL;
 public class CustomersController {
 
     @Autowired
-    private CusotmesService cusotmesService;
+    private CustomerService customerService;
     @GetMapping("/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") final Integer id){
-        Customer customer = cusotmesService.getCustomerById(id);
+        Customer customer = customerService.getCustomerById(id);
         if(customer == null){
             return ResponseEntity.notFound().build();
         }
@@ -27,11 +27,11 @@ public class CustomersController {
 
     @GetMapping("/customers")
     public List<Customer> getAllCustomers(){
-      return cusotmesService.getAllCustomers();
+      return customerService.getAllCustomers();
     }
     @PostMapping("/add")
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
-        Customer createdCustomer = cusotmesService.addCustomer(customer);
+        Customer createdCustomer = customerService.addCustomer(customer);
         return ResponseEntity.ok(createdCustomer);
     }
 
@@ -40,18 +40,18 @@ public class CustomersController {
         if(customer == null || customer.getId() == null){
            return ResponseEntity.notFound().build();
         }
-        Customer existingCustomer = cusotmesService.getCustomerById(customer.getId());
+        Customer existingCustomer = customerService.getCustomerById(customer.getId());
         existingCustomer.setFirstName(customer.getFirstName());
         existingCustomer.setLastName(customer.getLastName());
 
-        Customer createdCustomer = cusotmesService.updateCustomer(existingCustomer);
+        Customer createdCustomer = customerService.updateCustomer(existingCustomer);
 
         return ResponseEntity.ok(createdCustomer);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") final Integer id){
-     String customerResponse = cusotmesService.deleteById(id);
+     String customerResponse = customerService.deleteById(id);
      if(customerResponse == null){
          return ResponseEntity.notFound().build();
      }

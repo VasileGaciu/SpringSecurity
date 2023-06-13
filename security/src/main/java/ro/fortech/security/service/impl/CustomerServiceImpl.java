@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ro.fortech.security.entity.Account;
 import ro.fortech.security.entity.Customer;
 import ro.fortech.security.repository.CustomerRepository;
-import ro.fortech.security.service.CusotmesService;
+import ro.fortech.security.service.CustomerService;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -16,7 +16,7 @@ import static ro.fortech.security.util.Constants.CUSTOMER_DELETE_FAIL;
 
 @Service
 @Transactional
-public class CustomerServiceImpl implements CusotmesService {
+public class CustomerServiceImpl implements CustomerService {
     @Autowired
     CustomerRepository customerRepository;
     @Override
