@@ -1,5 +1,6 @@
 package ro.fortech.security.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/refresh")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<TokenModel> getAccessToken(HttpServletRequest request){
         String token = request.getHeader("Authorization");
         TokenModel tokenModel = jwtService.getAccessToken(token.substring(7));
