@@ -30,7 +30,7 @@ public class SecurityConfiguration{
                 .and()
                 .authorizeRequests()
                 .antMatchers("/customer/**").hasRole("USER")
-                .mvcMatchers("/auth/tokens").permitAll()
+                .mvcMatchers("/auth/token").permitAll()
                 .mvcMatchers("/auth/refresh").authenticated()
                 .mvcMatchers("/account/**").hasRole("ADMIN")
                 .and()

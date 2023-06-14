@@ -1,5 +1,6 @@
 package ro.fortech.security.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class AccountController {
     private AccountService accountService;
 
     @GetMapping("/{accountId}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<AccountModel> getCustomerAccount(@PathVariable("accountId") final Integer accountId){
         AccountModel account = accountService.getAccount(accountId);
         if(account == null){
@@ -26,6 +28,7 @@ public class AccountController {
     }
 
     @PostMapping("/add")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Account> createAccount(@RequestBody Account account){
         Account savedAccount = accountService.createAccount(account);
         if(savedAccount == null){
@@ -35,6 +38,7 @@ public class AccountController {
     }
 
     @PutMapping("/update")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Account> updateAccount(@RequestBody final Account account){
         Account savedAccount = accountService.updateAccount(account);
         if(savedAccount == null){
@@ -44,6 +48,7 @@ public class AccountController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<String> deleteAccount(@PathVariable("id") final Integer id){
        String response = accountService.deleteAccount(id);
        if(response == null){

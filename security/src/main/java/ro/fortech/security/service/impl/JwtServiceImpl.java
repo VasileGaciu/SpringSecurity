@@ -42,7 +42,7 @@ public class JwtServiceImpl implements JwtService {
         }
         Map<String, Object> claims = new HashMap<>();
         TokenModel tokenModel = new TokenModel();
-        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 15);
+        Date accessTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60);
         Date refreshTokenExpiration = new Date(System.currentTimeMillis() + 1000 * 60 * 3);
         String accessToken = generateToken(authenticationModel.getUsername(), claims, accessTokenExpiration);
         String refreshToken = generateToken(authenticationModel.getUsername(), claims, refreshTokenExpiration);

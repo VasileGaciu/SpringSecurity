@@ -1,5 +1,6 @@
 package ro.fortech.security.controller;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ public class CustomersController {
     @Autowired
     private CustomerService customerService;
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Customer> getCustomerById(@PathVariable("id") final Integer id){
         Customer customer = customerService.getCustomerById(id);
         if(customer == null){
@@ -26,16 +28,19 @@ public class CustomersController {
     }
 
     @GetMapping("/customers")
+    @SecurityRequirement(name = "Bearer Authentication")
     public List<Customer> getAllCustomers(){
       return customerService.getAllCustomers();
     }
     @PostMapping("/add")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         Customer createdCustomer = customerService.addCustomer(customer);
         return ResponseEntity.ok(createdCustomer);
     }
 
     @PutMapping("/update")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
         if(customer == null || customer.getId() == null){
            return ResponseEntity.notFound().build();
@@ -50,6 +55,7 @@ public class CustomersController {
     }
 
     @DeleteMapping("/{id}")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<String> deleteCustomer(@PathVariable("id") final Integer id){
      String customerResponse = customerService.deleteById(id);
      if(customerResponse == null){
